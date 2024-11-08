@@ -1,3 +1,6 @@
+#ifndef SCOPE_H
+#define SCOPE_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "parser.h"
@@ -8,10 +11,11 @@
 #include "utilities.h"
 #include "id_use.h"
 
-//struct for scope objects to be put into SymbolTable
-typedef struct Scope{
+typedef struct Scope Scope;
 
-} Scope;
+Scope *create_scope(SymbolTable *symbol_table, Scope *parent);
+void destroy_scope(Scope *scope);
+void add_identifier_to_scope(Scope *scope, const char *name);
+bool is_identifier_in_scope(Scope *scope, const char *name);
 
-//creates a Scope object 
-extern Scope create();
+#endif

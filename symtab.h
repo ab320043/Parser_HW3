@@ -1,23 +1,25 @@
+#ifndef SYMTAB_H
+#define SYMTAB_H
+
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "parser.h"//not sure if this is needed here, but leaving it in case
 #include "id_attrs.h"
 #include "ast.h"
 #include "symtab.h"
 #include "scope_check.h"
 #include "utilities.h"
 #include "id_use.h"
+#include <stdbool.h>
 
-//struct for the symbol table. SymbolTable should be a stack of Scope objects from the scope files
-typedef struct SymbolTable{
-
+typedef struct SymbolTable {
+    Scope *scopes; // Stack of scopes
 } SymbolTable;
 
-//initialize the symbol table
-extern void init();
+void init_symbol_table(SymbolTable *table);
+void add_scope(SymbolTable *table);
+void remove_scope(SymbolTable *table);
+void add_symbol(SymbolTable *table, const char *name);
+bool symbol_exists(SymbolTable *table, const char *name);
 
-//create a scope object and add it to the stack
-extern void add_scope();
-
-//remove a scope object from the stack
-extern void remove_scope();
+#endif
